@@ -3,7 +3,7 @@ from business.models import Arkans
 
 class businessAdmin(admin.ModelAdmin):
 
-    list_display = ['cel']
+    list_display = ['arkan_number','cel']
 
 
 admin.site.register(Arkans, businessAdmin)

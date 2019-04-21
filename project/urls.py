@@ -16,11 +16,12 @@ Including another URLconf
 from django.conf.urls import url
 from django.contrib import admin
 from django.urls import path
-from business.views import hello
+from business.views import hello, rezultat
 
 
 
 urlpatterns = [
     url(r'^$', hello),
+    url(r'^business_name/', rezultat),
     path('admin/', admin.site.urls),
 ]
