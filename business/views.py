@@ -1,5 +1,5 @@
 from django.shortcuts import render
-from business.models import BusinessForm, Birthday_Form, Arkans
+from business.models import BusinessForm, Arkans
 import string
 from math import *
 
@@ -17,15 +17,18 @@ def rezultat(request, name=None):
         t = 0
         osnova = 0
         jertva = 0
-        ttt = ''
+        karma_txt = ''
+
 
         userform = BusinessForm(request.POST)
         info = request.POST
         i = info.dict()
         your_name = i['name']
         business = i['business_name'].lower() # lower case letters
+        birth_day = i['birth_day']
+        birth_month = i['birth_month']
+        birth_year = i['birth_year']
 
-        dlina = len(business) - business.count(' ') # длина строки без пробелов
 
         # dict with alphabet
 
@@ -74,6 +77,42 @@ def rezultat(request, name=None):
         if jertva == 0:
             jertva = 22
 
+        # расчет кармичности
+
+        if birth_day or birth_month != '':
+
+            birth_day = int(birth_day)
+            birth_month = int(birth_month)
+
+            if (birth_day >= 14) and (birth_day <= 22):
+
+                Karma1 = birth_day - birth_month
+                Karma2 = birth_day
+
+
+            else:
+                dt = birth_day
+                if (birth_day > 22):
+                    dt = birth_day - 22
+
+                Karma1 = abs(dt - birth_month)
+
+                if Karma1 == 0:
+                    Karma1 = 22
+                Karma2 = 0
+
+
+
+                if cel == Karma1 or cel == Karma2:
+                    karma_txt = 'НАЗВАНИЕ КАРМИЧНО'
+                if osnova == Karma1 or osnova == Karma2:
+                    karma_txt = 'НАЗВАНИЕ КАРМИЧНО'
+                if jertva == Karma1 or jertva == Karma2:
+                    karma_txt = 'НАЗВАНИЕ КАРМИЧНО'
+
+
+
+
 
         arkan_cel = Arkans.objects.get(arkan_number=cel)
         cel_txt = arkan_cel.cel
@@ -84,19 +123,15 @@ def rezultat(request, name=None):
 
 
         context = {
-                    'form': userform, 'name':your_name, 'business': business, 'dlina':dlina,
+                    'form': userform, 'name':your_name, 'business': business,
                    'cel':cel, 'osnova':osnova, 'jertva':jertva, 'cel_txt':cel_txt,
-                    'osnova_txt':osnova_txt, 'jertva_txt':jertva_txt
+                    'osnova_txt':osnova_txt, 'jertva_txt':jertva_txt, 'birth_day': birth_day,
+                    'birth_month': birth_month, 'birth_year': birth_year, 'karma_txt':karma_txt
                   }
         return render(request, "business_name.html", context)
 
     else:
         form = BusinessForm()
         return render(request, "business_name.html", {'form':form})
-
-
-def test(request):
-    form = Birthday_Form()
-    return render(request, "test.html", {'form':form})
 
 
