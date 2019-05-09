@@ -1,6 +1,115 @@
-<!DOCTYPE HTML>
-<meta charset="utf-8">
-<title>Крошечный документ HTML5</title>
+<!doctype html>
+<html lang="ru">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="/static/bootstrap/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <title>Эзотерический портал!</title>
+  </head>
+
+  <body>
+
+  <div class="pos-f-t">
+  <div class="collapse" id="navbarToggleExternalContent">
+    <div class="light"  style="background-color: #563D86;">
+      <h5 class="text-white h4">Ваши данные:</h5>
+      <span class="text-muted">используемые для расчетов.</span>
+
+
+
+    </div>
+
+  </div>
+
+  </div>
+  <nav class="navbar navbar-dark"  style="background-color: #563D86;">
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarToggleExternalContent" aria-controls="navbarToggleExternalContent" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+      <span class="text-white">Ваши данные.</span>
+    </button>
+
+      <nav class="navbar navbar-expand-lg navbar-light">
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+
+  <div class="collapse navbar-collapse" id="navbarSupportedContent">
+    <ul class="navbar-nav mr-auto">
+
+      <li class="nav-item">
+        <a class="nav-link" href="/">О нас <span class="sr-only">(current)</span></a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="#">Нумерология</a>
+      </li>
+      <li class="nav-item dropdown">
+        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          Сделать расчет Онлайн
+        </a>
+        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+
+          <a class="dropdown-item" href="/business_name/">Название бизнеса</a>
+          <a class="dropdown-item" href="#">Карта человека</a>
+          <a class="dropdown-item" href="#">Индивидуальный заказ</a>
+
+        </div>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="#">Обучение</a>
+      </li>
+      <li class="nav-item">
+        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal" data-whatever="@mdo">Обратная связь</button>
+
+        <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+          <div class="modal-dialog" role="document">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Новое сообщение</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                  <span aria-hidden="true">&times;</span>
+                </button>
+              </div>
+              <div class="modal-body">
+                <form>
+                  <div class="form-group">
+                    <label for="recipient-name" class="col-form-label">Получатель:</label>
+                    <input type="text" class="form-control" id="recipient-name">
+                  </div>
+                  <div class="form-group">
+                    <label for="message-text" class="col-form-label">Сообщение:</label>
+                    <textarea class="form-control" id="message-text"></textarea>
+                  </div>
+                </form>
+              </div>
+              <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Закрыть</button>
+                <button type="button" class="btn btn-primary">Отправить сообщение</button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+
+      </li>
+    </ul>
+
+
+</div>
+</nav>
+</nav>
+
+
+
+
+
+
+
+<center><h4>Расчет названия бизнеса </h4></center>
+
+
 
 <form method="POST">
   {% csrf_token %}
@@ -10,11 +119,28 @@
   <input type="submit" value="Рассчитать" >
 </form>
 
-<h4><p> Цель / Основа / Жертва: {{ cel }} / {{ osnova }} / {{ jertva }}</p></h4>
 
 
-<h4><p> <font color="red">{{ karma_txt}}</font></p></h4>
+  <main class="col-12 col-md-9 col-xl-8 py-md-3 pl-md-5 bd-content" role="main">
 
-<h4><p> {{ cel_txt }}</p></h4>
-<h4><p> {{ osnova_txt }}</p></h4>
-<h4><p> {{ jertva_txt }}</p></h4>
+<p> <font color="red">{{ karma_txt}}</font></p>
+<p class="lead">{{ cel_txt }}</p>
+<p class="lead">{{ osnova_txt }}</p>
+<p class="lead">{{ jertva_txt }}</p>
+
+
+</div>
+
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+    <script src="/static/bootstrap/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+  </body>
+
+</html>
+
+
+
+
+

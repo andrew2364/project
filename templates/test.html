@@ -1,0 +1,11 @@
+<!DOCTYPE HTML>
+<meta charset="utf-8">
+<title>Крошечный документ HTML5</title>
+
+<form method="POST">
+  {% csrf_token %}
+
+        {{ form.as_p }}
+
+  <input type="submit" value="Send" >
+</form>
