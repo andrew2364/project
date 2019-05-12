@@ -1,5 +1,4 @@
 <!doctype html>
-<html lang="ru">
   <head>
     <!-- Required meta tags -->
     <meta charset="utf-8">
@@ -17,6 +16,17 @@
     <div class="light"  style="background-color: #563D86;">
       <h5 class="text-white h4">Ваши данные:</h5>
       <span class="text-muted">используемые для расчетов.</span>
+
+      <form>
+
+      {% for field in contacts %}
+          <div class="form-group col-md-6">
+                {{ field }}
+          </div>
+      {% endfor %}
+        <button type="submit">Сохранить</button>
+
+      </form>
 
 
 

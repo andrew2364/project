@@ -1,12 +1,28 @@
 from django.shortcuts import render
-from business.models import BusinessForm, Arkans
+from business.models import BusinessForm, Arkans, ContactForm
 
 
 def hello(request) :
-	return render(request, "index.html")
+
+
+	info_get = request.GET
+	info_session = request.session.get('info_get')
+
+	if info_get == {}:
+		contacts = ContactForm(info_session)
+	else :
+		contacts = ContactForm(info_get)
+		request.session['info_get'] = info_get
+
+
+	context = {	'contacts' : contacts}
+
+	return render(request, "index.html", context)
+
 
 
 def rezultat(request, name=None) :
+
 	if request.method == "POST" :
 		arkan_cel = {}
 		arkan_osnova = {}
@@ -16,12 +32,24 @@ def rezultat(request, name=None) :
 		jertva = 0
 		karma_txt = ''
 
+		info_post = request.POST
+
+		info_get = request.GET
+
+		if info_get == {} :
+			info_session = request.session.get('info_get')
+			contacts = ContactForm(info_session)
+		else :
+			contacts = ContactForm(info_get)
+			request.session['info_get'] = info_get
+			info_session = request.session.get('info_get')
+
 		userform = BusinessForm(request.POST)
-		info = request.POST
-		business = info['business_name'].lower()  # lower case letters
-		birth_day = info['birth_day']
-		birth_month = info['birth_month']
-		birth_year = info['birth_year']
+
+		business = info_post['business_name'].lower()  # lower case letters
+		birth_day = info_session['birth_day']
+		birth_month = info_session['birth_month']
+		birth_year = info_session['birth_year']
 
 		# dict with alphabet
 
@@ -123,7 +151,7 @@ def rezultat(request, name=None) :
 			jertva_txt = arkan_jertva.jertva
 
 			context = {
-				'form' : userform, 'business' : business,
+				'form' : userform, 'business' : business, 'contacts': contacts,
 				'cel' : cel, 'osnova' : osnova, 'jertva' : jertva, 'cel_txt' : cel_txt,
 				'osnova_txt' : osnova_txt, 'jertva_txt' : jertva_txt, 'birth_day' : birth_day,
 				'birth_month' : birth_month, 'birth_year' : birth_year, 'karma_txt' : karma_txt
@@ -141,7 +169,7 @@ def rezultat(request, name=None) :
 
 
 			context = {
-				'form' : userform, 'business' : business,
+				'form' : userform, 'business' : business, 'contacts': contacts,
 				'cel' : cel, 'osnova' : osnova, 'jertva' : jertva, 'cel_txt' : cel_txt,
 				'osnova_txt' : osnova_txt, 'jertva_txt' : jertva_txt, 'birth_day' : birth_day,
 				'birth_month' : birth_month, 'birth_year' : birth_year, 'karma_txt' : karma_txt,
@@ -152,5 +180,20 @@ def rezultat(request, name=None) :
 
 
 	else :
+
 		form = BusinessForm()
-		return render(request, "business_name.html", {'form' : form})
+
+		info_get = request.GET
+		info_session = request.session.get('info_get')
+
+		if info_get == {} :
+			contacts = ContactForm(info_session)
+		else :
+			contacts = ContactForm(info_get)
+			request.session['info_get'] = info_get
+
+		context = {
+			'form' : form, 'contacts': contacts
+		}
+
+		return render(request, "business_name.html", context)

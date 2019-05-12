@@ -9,11 +9,15 @@ class Arkans(models.Model):
 	osnova = models.TextField(max_length=1000)
 	jertva = models.TextField(max_length=1000)
 
+
 class BusinessForm(forms.Form):
 
-	name = forms.CharField(label='Ваше имя ', max_length=50, required=False)
-	birth = forms.DateField(required = False, label='День рождения ', widget=forms.SelectDateWidget(years=range(1930, 2020)))
 	business_name = forms.CharField(label='Название бизнеса ', max_length=200)
 
+
+class ContactForm(forms.Form):
+
+	name = forms.CharField(label='Имя ', max_length=100, required=False)
+	birth = forms.DateField(required = False, label='День рождения ', widget=forms.SelectDateWidget(years=range(1930, 2020)))
 
 
